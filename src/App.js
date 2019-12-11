@@ -19,7 +19,6 @@ class App extends Component {
   }
 
   onSearchChange = (event) => {
-    // console.log(event.target.value);
     this.setState({ searchField: event.target.value });
   }
 
@@ -27,15 +26,18 @@ class App extends Component {
     const filteredRobots = this.state.robots.filter(robot => {
       return robot.name.toLowerCase().includes(this.state.searchField.toLowerCase());
     });
-    // console.log(filteredRobots);
 
-    return (
-      <div className="tc">
-        <h1 className='f1'>RoboFriends</h1>
-        <SearchBox searchChange={this.onSearchChange} />
-        <CardList robots={filteredRobots} />
-      </div>
-    );
+    if (this.state.robots.length === 0) {
+      return <h1 className='tc f1'>Loading</h1>
+    } else {
+      return (
+        <div className="tc">
+          <h1 className='f1'>RoboFriends</h1>
+          <SearchBox searchChange={this.onSearchChange} />
+          <CardList robots={filteredRobots} />
+        </div>
+      );
+    }
   }
 }
 
