@@ -30,10 +30,9 @@ class App extends Component {
       return robot.name.toLowerCase().includes(searchField.toLowerCase());
     });
 
-    if (!robots.length) {
-      return <h1 className='tc f1'>Loading</h1>
-    } else {
-      return (
+    return !robots.length ?
+      <h1 className='tc f1'>Loading</h1> : 
+      (
         <div className="tc">
           <h1 className='f1'>RoboFriends</h1>
           <SearchBox searchChange={this.onSearchChange} />
@@ -41,8 +40,7 @@ class App extends Component {
             <CardList robots={filteredRobots} />
           </Scroll>
         </div>
-      );
-    }
+      )
   }
 }
 
